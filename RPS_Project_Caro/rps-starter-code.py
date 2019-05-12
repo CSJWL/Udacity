@@ -140,11 +140,11 @@ class Game:
     def play_game(self):
         print("Game start!")
         # round starts at zero
-        round = 0
+        self.round = 0
         # create a while loop that is always true, for infinitely play
         while True:
-            round += 1
-            print(f"Round {round}:")
+            self.round += 1
+            print(f"Round {self.round}:")
             self.play_round()
         print("Game over!")
 
