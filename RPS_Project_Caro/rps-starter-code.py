@@ -29,8 +29,34 @@ class RandomPlayer(Player):
 class HumanPlayer(Player):
     def move(self):
         user_input = input("bust a move; rock, paper or scissors? ")
+        if user_input == 'quit':
+
+            #display the outcome of each round
+            print(f"Player 1 has won {game.p1_wins} times, Player 2 has won {game.p2_wins} times and there was/were {game.ties} ties")
+            if game.p1_wins > game.p2_wins:
+                print(f"Player 1 wins!")
+            elif game.p1_wins < game.p2_wins:
+                print(f"Player 2 wins!")
+            else:
+                print(f"ties!")
+
+            exit()
+
+        #validate the users input. if input is incorrect, keeps asking the same question until input is valid.
         while user_input != 'rock' and user_input != 'paper' and user_input != 'scissors':
             user_input = input("your input was incorrect. bust a move; rock, paper or scissors? ")
+            if user_input == 'quit':
+
+                #display the outcome of each round
+                print(f"Player 1 has won {game.p1_wins} times, Player 2 has won {game.p2_wins} times and there was/were {game.ties} ties")
+                if game.p1_wins > game.p2_wins:
+                    print(f"Player 1 wins!")
+                elif game.p1_wins < game.p2_wins:
+                    print(f"Player 2 wins!")
+                else:
+                    print(f"ties!")
+
+                exit()
         return user_input
 
 def beats(one, two):
@@ -102,13 +128,14 @@ class Game:
 
     def play_game(self):
         print("Game start!")
-        for round in range(3):
+        #round starts at zero
+        round = 0
+        #create a while loop that is always true, so that the HumanPlayer can play the game infinitely untill the HumanPlayer inputs the word 'quit'.
+        while True:
+            round += 1
             print(f"Round {round}:")
             self.play_round()
         print("Game over!")
-
-        #display the outcome of each round
-        print(f"Player 1 has won {self.p1_wins} times, Player 2 has won {self.p2_wins} times and there was/were {self.ties} ties")
 
 if __name__ == '__main__':
     game = Game(HumanPlayer(), CyclePlayer())
