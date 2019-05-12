@@ -16,14 +16,14 @@ class Player:
         return 'rock'
 
     def learn(self, my_move, their_move):
-        pass
+        #create instance variables
+        self.my_move = my_move
+        self.their_move = their_move
 
 #create a randomplayer as a subclass of player. The randomplayer returns one of 3 possible moves at random.
 class RandomPlayer(Player):
     def move(self):
-        print("in randomplayer")
         return random.choice(moves)
-
 
 #create a humanplayer as a subclass of player.
 class HumanPlayer(Player):
@@ -35,6 +35,18 @@ def beats(one, two):
             (one == 'scissors' and two == 'paper') or
             (one == 'paper' and two == 'rock'))
 
+#create ReflectPlayer as a subclass of player.
+class ReflectPlayer(Player):
+    def __init__(self):
+        self.their_move = None
+
+    def move(self):
+
+        #During the first round, ReflectPlayer will have no input, therefore their_move == None should return a random move.
+        if self.their_move == None:
+            return random.choice(moves)
+        else:
+            return self.their_move
 
 class Game:
     def __init__(self, p1, p2):
@@ -76,8 +88,8 @@ class Game:
         print("Game over!")
 
         #display the outcome of each round
-        print(f"Player1 has won {self.p1_wins} times, Player 2 has won {self.p2_wins} times and there was/were {self.ties} ties")
+        print(f"Player 1 has won {self.p1_wins} times, Player 2 has won {self.p2_wins} times and there was/were {self.ties} ties")
 
 if __name__ == '__main__':
-    game = Game(RandomPlayer(), HumanPlayer())
+    game = Game(RandomPlayer(), ReflectPlayer())
     game.play_game()
