@@ -24,6 +24,12 @@ class RandomPlayer(Player):
         print("in randomplayer")
         return random.choice(moves)
 
+
+#create a humanplayer as a subclass of player.
+class HumanPlayer(Player):
+    def move(self):
+        return input("bust a move; rock, paper or scissors? ")
+
 def beats(one, two):
     return ((one == 'rock' and two == 'scissors') or
             (one == 'scissors' and two == 'paper') or
@@ -70,9 +76,8 @@ class Game:
         print("Game over!")
 
         #display the outcome of each round
-        print(f" Player1 has won {self.p1_wins} times, Player 2 has won {self.p2_wins} times and there was/were {self.ties} ties")
+        print(f"Player1 has won {self.p1_wins} times, Player 2 has won {self.p2_wins} times and there was/were {self.ties} ties")
 
 if __name__ == '__main__':
-    print("hoi")
-    game = Game(RandomPlayer(), Player())
+    game = Game(RandomPlayer(), HumanPlayer())
     game.play_game()
