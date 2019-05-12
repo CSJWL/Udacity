@@ -48,6 +48,23 @@ class ReflectPlayer(Player):
         else:
             return self.their_move
 
+#create CyclePlayer as a subclass of player.
+class CyclePlayer(Player):
+    def __init__(self):
+        self.my_move = None
+
+    def move(self):
+
+        #During the first round, CyclePlayer will have no input, therefore my_move == None should return a random move.
+        if self.my_move == None:
+            return random.choice(moves)
+        elif self.my_move == 'rock':
+            return 'paper'
+        elif self.my_move == 'paper':
+            return 'scissors'
+        elif self.my_move == 'scissors':
+            return 'rock'
+
 class Game:
     def __init__(self, p1, p2):
         self.p1 = p1
@@ -91,5 +108,5 @@ class Game:
         print(f"Player 1 has won {self.p1_wins} times, Player 2 has won {self.p2_wins} times and there was/were {self.ties} ties")
 
 if __name__ == '__main__':
-    game = Game(RandomPlayer(), ReflectPlayer())
+    game = Game(RandomPlayer(), CyclePlayer())
     game.play_game()
