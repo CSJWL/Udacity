@@ -28,7 +28,10 @@ class RandomPlayer(Player):
 #create a humanplayer as a subclass of player.
 class HumanPlayer(Player):
     def move(self):
-        return input("bust a move; rock, paper or scissors? ")
+        user_input = input("bust a move; rock, paper or scissors? ")
+        while user_input != 'rock' and user_input != 'paper' and user_input != 'scissors':
+            user_input = input("your input was incorrect. bust a move; rock, paper or scissors? ")
+        return user_input
 
 def beats(one, two):
     return ((one == 'rock' and two == 'scissors') or
@@ -108,5 +111,5 @@ class Game:
         print(f"Player 1 has won {self.p1_wins} times, Player 2 has won {self.p2_wins} times and there was/were {self.ties} ties")
 
 if __name__ == '__main__':
-    game = Game(RandomPlayer(), CyclePlayer())
+    game = Game(HumanPlayer(), CyclePlayer())
     game.play_game()
